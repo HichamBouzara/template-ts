@@ -1,9 +1,11 @@
+import { Observer } from "../patterns/Observer";
+import { Subject } from "../patterns/Subject";
 import { DisplayTimeState } from "./DisplayTimeState";
-import { WatchModeState } from "./WatchModeState";
+import { ClockModeState } from "./ClockModeState";
 
-export class WatchModel implements Subject {
+export class ClockModel implements Subject {
   private currentTime: Date;
-  private currentState: WatchModeState;
+  private currentState: ClockModeState;
   private isLightOn: boolean;
   private observers: Observer[] = [];
 
@@ -38,7 +40,7 @@ export class WatchModel implements Subject {
     return this.isLightOn;
   }
 
-  public setState(newState: WatchModeState): void {
+  public setState(newState: ClockModeState): void {
     this.currentState = newState;
   }
 

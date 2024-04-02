@@ -1,12 +1,23 @@
-import { WatchModel } from "../models/WatchModel";
+import { RotateAnimation } from "../animations/RotateAnimation";
+import { ScaleAnimation } from "../animations/ScaleAnimation";
+import { Vector2D } from "../math/Vector2D";
+import { ClockModel } from "../models/ClockModel";
+import { Observer } from "../patterns/Observer";
+import { Subject } from "../patterns/Subject";
 
-export class WatchView implements Observer {
+export class ClockView implements Observer {
   private timeDisplayElement: HTMLElement;
   private lightStatusElement: HTMLElement;
+  public clockElement: HTMLElement;
+  private rotationAnimation: RotateAnimation;
+  private scaleAnimation: ScaleAnimation;
 
   constructor(clockId: string) {
     this.timeDisplayElement = document.getElementById(`timeDisplay${clockId}`)!;
     this.lightStatusElement = document.getElementById(`lightStatus${clockId}`)!;
+    this.clockElement = document.getElementById(`clock${clockId}`)!;
+    this.rotationAnimation = new RotateAnimation(this.clockElement);
+    this.scaleAnimation = new ScaleAnimation(this.clockElement);
   }
 
   public displayTime(time: Date, isLightOn: boolean): void {
@@ -32,10 +43,26 @@ export class WatchView implements Observer {
   }
 
   public update(subject: Subject): void {
-    if (subject instanceof WatchModel) {
+    if (subject instanceof ClockModel) {
       const currentTime = subject.getCurrentTime();
       const isLightOn = subject.isLightEnabled();
       this.displayTime(currentTime, isLightOn);
     }
+  }
+
+  applyRotationAroundSelf(): void {
+    this.rotationAnimation.rotateAroundSelf();
+  }
+
+  applyRotationAroundRandomPoint(): void {
+    this.rotationAnimation.rotateAroundRandomPoint();
+  }
+
+  applyRotationAroundPoint(point: Vector2D): void {
+    this.rotationAnimation.rotateAroundPoint(point);
+  }
+
+  applyScalingUpAndDown(): void {
+    this.scaleAnimation.scaleUpAndDown();
   }
 }

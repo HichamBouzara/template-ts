@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Watch App</title>
+    <title>Clock App</title>
     <link rel="stylesheet" href="public/style/index.css" />
   </head>
   <body>
@@ -24,7 +24,14 @@
           </div>
         </div>
       </div>
+      <div class="animationControls">
+        <button id="rotateSelf">Rotate Around Itself</button>
+        <button id="rotateRandom">Rotate Around Random Point</button>
+        <button id="rotateSpecified">Rotate Around Specified Point</button>
+        <button id="scaleUpDown">Scale Up and Down</button>
+      </div>
       <button id="addClockButton" class="add-clock-button">Add Clock</button>
     </div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.9.0/dist/gsap.min.js"></script>
 </html>
